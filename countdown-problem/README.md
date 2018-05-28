@@ -1,20 +1,20 @@
 **How to run**
 Assuming you have Haskell installed along with ghc or Stack.
-Write the following prompt in the terminal: 
+Write the following prompt in the terminal:
 	> Stack ghci countdown.hs
 (NB: Remove 'Stack' if you don't use Stack)
 
-To specify an integer array and integer target value and find solutions, type: 
+To specify an integer array and integer target value and find solutions, type:
 	> solutions' [x,y,z,...] k
 where x,y,z,...,k are integers
 
-There is also defined a main method that will run the script for the following input: 
+There is also defined a main method that will run the script for the following input:
 [1,3,7,10,25,50] 765.
-Simply type 
+Simply type
 	> main
 to run it.
 
-** Problem description ** 
+**Problem description**
 In the countdown problem a function (arithmetic expression) must be constructed
 that calculates a given result from a given set of N numbers. All
 numbers must be positive integers (including intermediate results), and each of

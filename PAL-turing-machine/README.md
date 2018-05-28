@@ -11,5 +11,5 @@ Follow the instructions printed in the terminal.
 
 **Description**
 A simulation of a deterministic Turing Machine that decides if the input string
-is a palindrome. The input string must be of the alphabet {a,b}^*. The TM
-returns 'a' if true, 'b' otherwise. 
+is a palindrome. The input string must be of the alphabet {a,b}^\*. The TM
+returns 'a' if true, 'b' otherwise.
