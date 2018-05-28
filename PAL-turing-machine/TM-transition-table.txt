@@ -1,0 +1,67 @@
+< CurrentState, InputSymbol, OutputSymbol, NewState, Move >
+
+===== STATES =====
+<q0, 'a', 'x', q1, R>
+<q0, 'b', 'x', q2, R>
+<q0, 'x', 'x', q_accept, Idle>
+
+if q0(a)
+<q1, 'a', 'a', q1, R>     # keep state, move right
+<q1, 'b', 'b', q1, R>
+<q1, 'x', 'x', q3, L>     # until hit 'x', then move left
+
+# if q0(b)
+<q2, 'a', 'a', q2, R>     # keep state, move right
+<q2, 'b', 'b', q2, R>
+<q2, 'x', 'x', q4, L>     # until hit 'x', then move left
+
+# check if right end is 'a'
+# else set q_reject
+<q3, 'a', 'x', q5, L>           # "accept"
+<q3, 'b', 'b', q_reject, Idle>  # reject
+<q3, 'x', 'x', q_accept, Idle>
+
+# check if right end is 'b'
+# else set q_reject
+<q4, 'a', 'a', q_reject, Idle>   # reject
+<q4, 'b', 'x', q5, L>         # accept
+<q4, 'x', 'x', q_accept, Idle>
+
+# if letters are matched
+# move back to start and repeat
+<q5, 'a', 'a', q5, L>
+<q5, 'b', 'b', q5, L>
+<q5, 'x', 'x', q0, R>
+
+<q_accept, * , 'a', halt>    # did find palindrome, output a and halt
+<q_reject, * , 'b', halt>    # did not find palindrome, output b and halt
+
+
+===== EXAMPLE =====
+Turing Machine M with input 'aba'
+
+< CurrentState, InputSymbol, OutputSymbol, NewState, Move >
+1. <q0,'a','x',q1,R>
+2. <q1,'b','b',q1,R>
+3. <q1,'a','a',q1,R>
+4. <q1,'x','x',q3,L>
+5. <q3,'a','x',q5,L>
+6. <q5,'b','b',q5,L>
+7. <q5,'x','x',q0,R>
+8. <q0,'b','x',q2,R>
+9. <q2,'x','x',q4,L>
+10. <q4,'x','x',q_accept>
+11. <q_accept,'','a',halt>
+
+# textual
+1. State q0, reads 'a', writes 'x', sets state q1, moves right.   #xba
+2. State q1, reads 'b', writes 'b', sets state q1, moves right.   #xba
+3. State q1, reads 'a', writes 'a', sets state q1, moves right.   #xba
+4. State q2, reads 'x', writes 'x', sets state q3, moves left.    #xba
+5. State q3, reads 'a', writes 'x', sets state q5, moves left.    #xbx
+6. State q5, reads 'b', writes 'b', sets state q5, moves left.    #xbx
+7. State q5, reads 'x', writes 'x', sets state q0, moves right.   #xbx
+8. State q0, reads 'b', writes 'x', sets state q2, moves right.   #xxx
+9. State q2, reads 'x', writes 'x', sets state q4, moves left.    #xxx
+10. State q4, reads 'x', sets state q_accept                      #xxx
+11. State q_accept, outputs 'a', halts
